@@ -1,0 +1,20 @@
+# Cloudflare Workers config for the online version – see DEPLOY.md.
+name = "grand-ranta-open"
+main = "worker/index.js"
+compatibility_date = "2026-11-01"
+
+# The built app (npm run build → dist/). Unknown paths like /unstoppable-clears get index.html.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "grand-ranta-open"
+# Paste the id printed by `npx wrangler d1 create grand-ranta-open` here (see DEPLOY.md, step 3).
+database_id = "a65c79c5-5d03-41f7-95be-db880e496831"
+migrations_dir = "migrations"
+
+# ADMIN_USER and ADMIN_PASSWORD are secrets – set them with `npx wrangler secret put`, never here.

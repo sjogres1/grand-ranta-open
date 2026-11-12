@@ -1,0 +1,4 @@
+# Local test credentials for `npx wrangler dev` - copy this file to .dev.vars.
+# Never put your real password in a file that you share or commit.
+ADMIN_USER=TestAdmin
+ADMIN_PASSWORD=change-me

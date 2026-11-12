@@ -1,0 +1,35 @@
+{
+  "name": "grand-ranta-open",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,green \"node --watch server/index.js\" \"vite\"",
+    "build": "tsc --noEmit && vite build",
+    "start": "npm run build && node server/index.js",
+    "typecheck": "tsc --noEmit",
+    "test:logic": "rolldown scripts/logic-test.ts --platform node --format esm --file node_modules/.cache/logic-test.mjs --log-level silent && node node_modules/.cache/logic-test.mjs",
+    "package": "node scripts/package.mjs",
+    "cf:dev": "vite build && wrangler d1 migrations apply grand-ranta-open --local && wrangler dev",
+    "deploy": "vite build && wrangler d1 migrations apply grand-ranta-open --remote && wrangler deploy",
+    "package:source": "node scripts/package-source.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "express": "^5.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "concurrently": "^10.0.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.6",
+    "wrangler": "^4.158.0"
+  }
+}
